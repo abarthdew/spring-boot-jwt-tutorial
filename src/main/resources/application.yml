@@ -1,0 +1,23 @@
+spring:
+  h2:
+    console:
+      enabled: true
+
+  datasource: # H2 DB 사용, 메모리 상 데이터 저장 방식
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop # SessionFactory가 시작될 때 Drop, Create, Alter / 종료될 때 Drop 
+    properties:
+      hibernate: # 콘솔 창에서 sql 보기 설정 추가
+        format_sql: true
+        show_sql: true
+
+logging:
+  level:
+    me.silvernine: DEBUG # 로깅 레벨: 디버그
