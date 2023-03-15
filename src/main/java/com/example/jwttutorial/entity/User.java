@@ -22,7 +22,7 @@ public class User {
 
    @Id
    @Column(name = "user_id")
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @GeneratedValue(strategy = GenerationType.IDENTITY) // 자동 증가
    private Long userId;
 
    @Column(name = "username", length = 50, unique = true)
@@ -42,5 +42,5 @@ public class User {
       name = "user_authority",
       joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
       inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
-   private Set<Authority> authorities;
+   private Set<Authority> authorities; // 권한 관계
 }
