@@ -1,16 +1,11 @@
 package com.example.jwttutorial.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.*;
 
 @Entity // DB Table 과 1:1로 매핑되는 객체를 뜻
-@Table(name = "`user`") // Table 명: user
+@Table(name = "user") // Table 명: user
 
 // lombok: get, set, builder, constructor 관련 코드 자동 생성
 @Getter
