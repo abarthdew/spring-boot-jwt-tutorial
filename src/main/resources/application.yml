@@ -18,7 +18,7 @@ spring:
       hibernate: # 콘솔 창에서 sql 보기 설정 추가
         format_sql: true
         show_sql: true
-    defer-datasource-initialization: true
+    defer-datasource-initialization: true # Hibernate가 초기화되기 전에 data.sql이 먼저 실행되어서 발생하는 오류 방지
 
 logging:
   level:
