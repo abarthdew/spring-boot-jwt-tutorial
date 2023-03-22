@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class HelloController {
 
-    @GetMapping("/hello")
+    @GetMapping("/hello_test")
     public ResponseEntity<String> hello() {
         log.debug("hello world!_1");
         return ResponseEntity.ok("hello world!_2");
