@@ -1,4 +1,4 @@
-package com.example.jwttutorial.dto;
+package com.example.jwttutorial.service;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
