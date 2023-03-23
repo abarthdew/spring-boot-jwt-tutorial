@@ -188,7 +188,7 @@
 
 ### 1) SecurityUtil 패키지, 클래스 생성: 간단한 유틸리티 메서드를 만들기 위함
 
-- Secu//rityContext에 getAuthentication()와 같이 Authentication 객체가 저장되는 시점:
+- SecurityContext에 getAuthentication()와 같이 Authentication 객체가 저장되는 시점:
     
     ![Untitled](./images/untitled.png)
     
@@ -275,7 +275,7 @@ Hibernate:
 
 (1) ADMIN 권한만 허용했던 api 테스트
 
-```json
+```java
 @GetMapping("/admin/{username}")
 @PreAuthorize("hasAnyRole('ADMIN')") // ADMIN 권한만 호출
 public ResponseEntity<User> getAdminInfo(@PathVariable String username) {
@@ -293,7 +293,7 @@ public ResponseEntity<User> getAdminInfo(@PathVariable String username) {
     
 - Authorization 탭에 토큰 적재
     
-    ```json
+    ```java
     // Tests 탭
     
     var jsonData = JSON.parse(responseBody) // responseBody의 jsonDate를 파싱
