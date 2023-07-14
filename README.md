@@ -64,7 +64,7 @@
 - security 설정 추가
 - 버그: [https://github.com/abarthdew/jwt-tutorial/issues/5](https://github.com/abarthdew/jwt-tutorial/issues/5)
 - 실행: shell에 쿼리문 출력
-    
+
     ```bash
     Hibernate: 
     
@@ -115,16 +115,14 @@
            foreign key (user_id)
            references user
     ```
-    
 
 ### 어플리케이션 실행 후 DB 접속
 
 - [localhost:8080/h2-console](http://localhost:8080/h2-console) → [connect] 버튼 클릭해서 접속
-    
-    ![Untitled](./images/untitled.png)
-    
-    ![Untitled](./images/untitled.png)
-    
+
+  ![Untitled](./images/untitled.png)
+
+  ![Untitled](./images/untitled.png)
 
 # 3. **JWT 코드, Security 설정 추가**
 
@@ -189,29 +187,28 @@
 ### 1) SecurityUtil 패키지, 클래스 생성: 간단한 유틸리티 메서드를 만들기 위함
 
 - SecurityContext에 getAuthentication()와 같이 Authentication 객체가 저장되는 시점:
-    
-    ![Untitled](./images/untitled.png)
-    
+
+  ![Untitled](./images/untitled.png)
+
     ```java
     // JwtFilter.java의 doFilter() 메서드
     
     // request가 들어오는 시점에 SecurityContext에 Authentication 객체가 저장됨
     SecurityContextHolder.getContext().setAuthentication(authentication);
     ```
-    
+
     - 이때 저장된 객체가
-    
+
     ```java
     // 여기서 꺼내지게 됨
     
     // SecurityUtil.java의 getCurrentUsername() 메서드
     SecurityContextHolder.getContext().getAuthentication();
     ```
-    
 
 ### 2) 회원가입 로직 생성: UserService 클래스 생성
 
-(1) data.sql의 권한은 USER, ADMIN 
+(1) data.sql의 권한은 USER, ADMIN
 
 → UserService의 ROLE_USER 권한과의 차이를 통해 테스트
 
@@ -284,15 +281,15 @@ public ResponseEntity<User> getAdminInfo(@PathVariable String username) {
 ```
 
 - ⇒ 그냥 실행하면 에러남
-    
-    ![Untitled](./images/untitled.png)
-    
+
+  ![Untitled](./images/untitled.png)
+
 - USER, ADMIN 권한 모두 가진 admin 계정으로 토큰 발급
-    
-    ![Untitled](./images/untitled.png)
-    
+
+  ![Untitled](./images/untitled.png)
+
 - Authorization 탭에 토큰 적재
-    
+
     ```java
     // Tests 탭
     
@@ -301,21 +298,19 @@ public ResponseEntity<User> getAdminInfo(@PathVariable String username) {
     // jsonData.token: token 필드에 있는 값을
     // “jwt_tutorial_token” 변수에 담음
     ```
-    
-    ![Untitled](./images/untitled.png)
-    
+
+  ![Untitled](./images/untitled.png)
+
     - ↓ 이렇게 해 놓으면 다른 request에서도 해당 변수의 값 사용 가능
-    
-    ![Untitled](./images/untitled.png)
-    
+
+  ![Untitled](./images/untitled.png)
 
 (2) admin 계정 토큰으로 test1 계정 정보 가져오기
 
 - /api/user/test1 : `("hasAnyRole('USER')") // USER 권한만 호출`
 - /api/admin/test1 : `("hasAnyRole('ADMIN')") // ADMIN 권한만 호출`
-    
-    ⇒ 둘 다 동일한 test1 계정의 정보가 출력됨
-    
+
+  ⇒ 둘 다 동일한 test1 계정의 정보가 출력됨
 
 ![Untitled](./images/untitled.png)
 
@@ -328,13 +323,13 @@ public ResponseEntity<User> getAdminInfo(@PathVariable String username) {
 ⇒ 새로 발급된 토큰은 “jwt_tutorial_token” 전역변수에 담겨지게 됨
 
 - `("hasAnyRole('ADMIN')") // ADMIN 권한만 호출` → 403 Forbidden 오류 발생
-    
-    ![Untitled](./images/untitled.png)
-    
-    ⇒ test1 계정으로 발급받은 토큰은 해당 api를 호출하는 권한이 없음
-    
-    ⇒ 403 Forbidden 오류: JwtAccessDeniedHandler가 작동
-    
+
+  ![Untitled](./images/untitled.png)
+
+  ⇒ test1 계정으로 발급받은 토큰은 해당 api를 호출하는 권한이 없음
+
+  ⇒ 403 Forbidden 오류: JwtAccessDeniedHandler가 작동
+
 - /api/user/test1: `("hasAnyRole('USER')") // USER 권한만 호출` → 정상 작동
 
 ![Untitled](./images/untitled.png)
